@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Titre de la page</title>
   <link rel="stylesheet" href="">
-  <script src="<?php echo js_url('jquery'); ?>"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 </head>
 <body>
 
@@ -15,6 +15,7 @@
 </form>
 <p>Vous voulez soummetre une url à l'indexation? cliquez<a href="<?php echo site_url(array('searchform', 'indexer')); ?>" >ici</a></p>
 <br/><br/>
+
 <div id="sources_list"></div>
 
 <script type="text/javascript">
@@ -24,20 +25,20 @@ $(function(){
     $('.form-control').keyup(function(){
         
         var field = $(this);// a pour valeur $(.search)
-        //console.log(field);
+        console.log(field);
         $('#sources_list').html(''); //on initialise le contenu de la div
 
         if(field.val().length >1)//si on a tapé plus de 1 caractere
         {
             $.ajax({
 
-                url: 'http://localhost/framework_ciniter/searchform/recherche',
-                type: 'post',
-                data: 'search='+$('.form-control').val(),
+                url: 'http://localhost/google_front_tp/searchform/recherche',
+                type: 'POST',
+                data: 'search=' + $('.form-control').val(),
 
                 success: function(data){
                     $('#sources_list').html(data);
-
+                    console.log(data);
                 }
 
             });

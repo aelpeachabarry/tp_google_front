@@ -2,17 +2,32 @@
 
 class Search_model extends CI_Model
 {
-	protected $table = 'website';
+	protected $table = 'url';
 
-	public function liste_url($search)
+	public function liste_url($search/*, $nb*/)
 	{
-		return $this->db->select('WEB_url')
+
+		if(!is_string($search) || empty($search) /*|| !is_int($nb)*/ )
+		{
+			return false;
+		}
+
+		return $this->db->select('URL_url')
 			->from($this->table)
-			->where('WEB_url')
-			->like('%$search%')
-			->order_by('WEB_id')
+			//->where('URL_url')
+			->like('URL_url', $search)
+			->order_by('idURL')
+			//->limit($nb)
 			->get()
 			->result();
+			//$rowcount = $query->num_rows();
+
+
+	}
+
+	public function count(){
+		
+		return $this->db->count_all($this->table);//count des commentaires
 	}
 
 }
